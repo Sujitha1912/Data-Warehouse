@@ -1,0 +1,1614 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/16/2023 12:32:18 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="COLLEGE"
+  DTS:CreatorName="college\goutham"
+  DTS:DTSID="{ED13A140-D22D-48F4-AB98-F3FB872F88CB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5035.3"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{8CBEEF2B-F472-4CB0-926D-BE3D6D02CFE8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[COLLEGE\DATAWAREHOUSE.Assignment3DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2727B214-586C-4022-BC47-1B4EC2352981}"
+      DTS:ObjectName="COLLEGE\DATAWAREHOUSE.Assignment3DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=COLLEGE\DATAWAREHOUSE;Initial Catalog=Assignment3DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{2727B214-586C-4022-BC47-1B4EC2352981}COLLEGE\DATAWAREHOUSE.Assignment3DW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{457393E7-2F88-4E4F-A96C-4EB2F4CA8996}"
+      DTS:ObjectName="Flat File Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\goutham\Desktop\GRADUATE PROGRAM\BA\Data warehouse\week 4\assignment 3\Assignment 3 – ETL for Simple Dimension Tables attached files Feb 14, 2023 415 PM\DateKeyAW.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DateKey"
+              DTS:DTSID="{E1362237-E9AE-4DAD-AD22-A99D4BE085BE}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ETL for DimDate"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{87c5cbd2-befb-4112-b68c-988b5a67f2f5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL for DimDate"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ETL for DimDate\Step 1-Extract data from CSV File"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Step 1-Extract data from CSV File"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].Columns[DateKeyDT_STR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].ExternalColumns[DateKey]"
+                      length="50"
+                      lineageId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].Columns[DateKeyDT_STR]"
+                      name="DateKeyDT_STR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].ExternalColumns[DateKey]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DateKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="step 2-1 get Month,Date,Year from DateKey"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Inputs[Derived Column Input].Columns[DateKeyDT_STR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DateKeyDT_STR"
+                      lineageId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].Columns[DateKeyDT_STR]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[yearDT_WSTR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[yearDT_WSTR]"
+                      name="yearDT_WSTR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[SUBSTRING](#{Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].Columns[DateKeyDT_STR]},1,4)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SUBSTRING(DateKeyDT_STR,1,4)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]"
+                      name="MonthDT_WSTR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[SUBSTRING](#{Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].Columns[DateKeyDT_STR]},5,2)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SUBSTRING(DateKeyDT_STR,5,2)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[DayDT_WSTR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[DayDT_WSTR]"
+                      name="DayDT_WSTR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[SUBSTRING](#{Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].Columns[DateKeyDT_STR]},7,2)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SUBSTRING(DateKeyDT_STR,7,2)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Step 2-10 create Dayofweek INT"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Inputs[Derived Column Input].Columns[Full DateDT_DBTIMESTAMP]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Full DateDT_DBTIMESTAMP"
+                      lineageId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]"
+                      name="DayofweekINT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEPART]("dw",#{Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEPART("dw",[Full DateDT_DBTIMESTAMP])</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\step 2-11 create isweekend in boolean"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="step 2-11 create isweekend in boolean"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Inputs[Derived Column Input].Columns[DayofweekINT]"
+                      cachedDataType="i4"
+                      cachedName="DayofweekINT"
+                      lineageId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Output].Columns[isweekendinboolean]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="7"
+                      lineageId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Output].Columns[isweekendinboolean]"
+                      name="isweekendinboolean"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 1 ? "WEEKEND" : #{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 7 ? "WEEKEND" : "WEEKDAY"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DayofweekINT == 1 ? "WEEKEND" : DayofweekINT == 7 ? "WEEKEND" : "WEEKDAY"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\step 2-2 create full date as STR"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="step 2-2 create full date as STR"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\step 2-2 create full date as STR.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\step 2-2 create full date as STR.Inputs[Derived Column Input].Columns[yearDT_WSTR]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="yearDT_WSTR"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[yearDT_WSTR]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\step 2-2 create full date as STR.Inputs[Derived Column Input].Columns[MonthDT_WSTR]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="MonthDT_WSTR"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\step 2-2 create full date as STR.Inputs[Derived Column Input].Columns[DayDT_WSTR]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="DayDT_WSTR"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[DayDT_WSTR]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-2 create full date as STR.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Output].Columns[Full DateDT_WSTR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Output].Columns[Full DateDT_WSTR]"
+                      name="Full DateDT_WSTR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[yearDT_WSTR]} + "-" + #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} + "-" + #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[DayDT_WSTR]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">yearDT_WSTR + "-" + MonthDT_WSTR + "-" + DayDT_WSTR</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-2 create full date as STR.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="step 2-3 Full date conv from str to date time"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Inputs[Data Conversion Input].Columns[Full DateDT_WSTR]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Full DateDT_WSTR"
+                      lineageId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Output].Columns[Full DateDT_WSTR]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]"
+                      name="Full DateDT_DBTIMESTAMP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Output].Columns[Full DateDT_WSTR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Step 2-4 create EnglishDayname in STR"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Inputs[Derived Column Input].Columns[DayofweekINT]"
+                      cachedDataType="i4"
+                      cachedName="DayofweekINT"
+                      lineageId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Output].Columns[EnglishdaynameinSTR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Output].Columns[EnglishdaynameinSTR]"
+                      name="EnglishdaynameinSTR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 1 ? "Sunday" : #{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 2 ? "Monday" : #{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 3 ? "Tuesday" : #{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 4 ? "wednesday" : #{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 5 ? "Thursday" : #{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 6 ? "Friday" : #{Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]} == 7 ? "Saturday" : "otherday"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DayofweekINT == 1 ? "Sunday" : DayofweekINT == 2 ? "Monday" : DayofweekINT == 3 ? "Tuesday" : DayofweekINT == 4 ? "wednesday" : DayofweekINT == 5 ? "Thursday" : DayofweekINT == 6 ? "Friday" : DayofweekINT == 7 ? "Saturday" : "otherday"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Step 2-6 create Englishmonthname in STR"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Inputs[Derived Column Input].Columns[MonthDT_WSTR]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="MonthDT_WSTR"
+                      lineageId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Output].Columns[EnglishmonthnameSTR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Output].Columns[EnglishmonthnameSTR]"
+                      name="EnglishmonthnameSTR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "01" ? "JAN" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "02" ? "FEB" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "03" ? "MAR" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "04" ? "APR" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "05" ? "MAY" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "06" ? "JUN" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "07" ? "JUL" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "08" ? "AUG" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "09" ? "SEP" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "10" ? "OCT" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "11" ? "NOV" : #{Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output].Columns[MonthDT_WSTR]} == "12" ? "DEC" : "OTHER MONTH"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">MonthDT_WSTR == "01" ? "JAN" : MonthDT_WSTR == "02" ? "FEB" : MonthDT_WSTR == "03" ? "MAR" : MonthDT_WSTR == "04" ? "APR" : MonthDT_WSTR == "05" ? "MAY" : MonthDT_WSTR == "06" ? "JUN" : MonthDT_WSTR == "07" ? "JUL" : MonthDT_WSTR == "08" ? "AUG" : MonthDT_WSTR == "09" ? "SEP" : MonthDT_WSTR == "10" ? "OCT" : MonthDT_WSTR == "11" ? "NOV" : MonthDT_WSTR == "12" ? "DEC" : "OTHER MONTH"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\step 2-8 calenderyear INT"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="step 2-8 calenderyear INT"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\step 2-8 calenderyear INT.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\step 2-8 calenderyear INT.Inputs[Derived Column Input].Columns[Full DateDT_DBTIMESTAMP]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Full DateDT_DBTIMESTAMP"
+                      lineageId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-8 calenderyear INT.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Output].Columns[CalenderyearINT]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Output].Columns[CalenderyearINT]"
+                      name="CalenderyearINT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEPART]("yyyy",#{Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEPART("yyyy",[Full DateDT_DBTIMESTAMP])</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ETL for DimDate\step 2-8 calenderyear INT.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\Step 2-9 create quaterINT"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Step 2-9 create quaterINT"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\Step 2-9 create quaterINT.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 2-9 create quaterINT.Inputs[Derived Column Input].Columns[Full DateDT_DBTIMESTAMP]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Full DateDT_DBTIMESTAMP"
+                      lineageId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-9 create quaterINT.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Output].Columns[QuarterINT]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Output].Columns[QuarterINT]"
+                      name="QuarterINT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEPART]("qq",#{Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEPART("qq",[Full DateDT_DBTIMESTAMP])</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-9 create quaterINT.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Step 2-Transform DatekeyDT_STR conv from STR to INT"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Inputs[Data Conversion Input].Columns[DateKeyDT_STR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DateKeyDT_STR"
+                      lineageId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].Columns[DateKeyDT_STR]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Output].Columns[DateKeyDT_I4]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Output].Columns[DateKeyDT_I4]"
+                      name="DateKeyDT_I4"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output].Columns[DateKeyDT_STR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL for DimDate\Step 3 Load into DimDate"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Step 3 Load into DimDate"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL for DimDate\Step 3 Load into DimDate.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[COLLEGE\DATAWAREHOUSE.Assignment3DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[COLLEGE\DATAWAREHOUSE.Assignment3DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].Columns[DateKeyDT_I4]"
+                      cachedDataType="i4"
+                      cachedName="DateKeyDT_I4"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Output].Columns[DateKeyDT_I4]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].Columns[Full DateDT_DBTIMESTAMP]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Full DateDT_DBTIMESTAMP"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Full Date]"
+                      lineageId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output].Columns[Full DateDT_DBTIMESTAMP]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].Columns[CalenderyearINT]"
+                      cachedDataType="i4"
+                      cachedName="CalenderyearINT"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Calenderyear]"
+                      lineageId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Output].Columns[CalenderyearINT]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].Columns[QuarterINT]"
+                      cachedDataType="i4"
+                      cachedName="QuarterINT"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Quarter]"
+                      lineageId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Output].Columns[QuarterINT]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].Columns[DayofweekINT]"
+                      cachedDataType="i4"
+                      cachedName="DayofweekINT"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Dayofweek]"
+                      lineageId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output].Columns[DayofweekINT]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].Columns[isweekendinboolean]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="isweekendinboolean"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[isweekend]"
+                      lineageId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Output].Columns[isweekendinboolean]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].Columns[EnglishdaynameinSTR]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="EnglishdaynameinSTR"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Englishdayname]"
+                      lineageId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Output].Columns[EnglishdaynameinSTR]" />
+                    <inputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].Columns[EnglishmonthnameSTR]"
+                      cachedDataType="wstr"
+                      cachedLength="11"
+                      cachedName="EnglishmonthnameSTR"
+                      externalMetadataColumnId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Englishmonthnam]"
+                      lineageId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Output].Columns[EnglishmonthnameSTR]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Full Date]"
+                      dataType="dbTimeStamp"
+                      name="Full Date" />
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Calenderyear]"
+                      dataType="i4"
+                      name="Calenderyear" />
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Quarter]"
+                      dataType="i4"
+                      name="Quarter" />
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Dayofweek]"
+                      dataType="i4"
+                      name="Dayofweek" />
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[isweekend]"
+                      dataType="wstr"
+                      length="7"
+                      name="isweekend" />
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Englishdayname]"
+                      dataType="wstr"
+                      length="9"
+                      name="Englishdayname" />
+                    <externalMetadataColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input].ExternalColumns[Englishmonthnam]"
+                      dataType="wstr"
+                      length="11"
+                      name="Englishmonthnam" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL for DimDate\Step 3 Load into DimDate.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 3 Load into DimDate.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL for DimDate\Step 3 Load into DimDate.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL for DimDate\Step 3 Load into DimDate.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ETL for DimDate.Paths[Data Conversion Output]"
+              endId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Data Conversion Output1]"
+              endId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Derived Column Output]"
+              endId="Package\ETL for DimDate\step 2-3 Full date conv from str to date time.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\ETL for DimDate\step 2-2 create full date as STR.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Derived Column Output1]"
+              endId="Package\ETL for DimDate\step 2-2 create full date as STR.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Derived Column Output2]"
+              endId="Package\ETL for DimDate\step 2-8 calenderyear INT.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Derived Column Output3]"
+              endId="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Derived Column Output4]"
+              endId="Package\ETL for DimDate\Step 2-9 create quaterINT.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\ETL for DimDate\step 2-8 calenderyear INT.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Derived Column Output5]"
+              endId="Package\ETL for DimDate\Step 3 Load into DimDate.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Derived Column Output6]"
+              endId="Package\ETL for DimDate\step 2-11 create isweekend in boolean.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\ETL for DimDate\Step 2-9 create quaterINT.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Derived Column Output7]"
+              endId="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\ETL for DimDate\Step 2-10 create Dayofweek INT.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\ETL for DimDate.Paths[Flat File Source Output]"
+              endId="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT.Inputs[Data Conversion Input]"
+              name="Flat File Source Output"
+              startId="Package\ETL for DimDate\Step 1-Extract data from CSV File.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\ETL for DimDate"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ETL for DimDate">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="265.6,41.6"
+          Id="Package\ETL for DimDate\Step 2-4 create EnglishDayname in STR"
+          TopLeft="90.714286237347,583.376477827415" />
+        <NodeLayout
+          Size="201.6,41.6"
+          Id="Package\ETL for DimDate\Step 2-9 create quaterINT"
+          TopLeft="126.428572559844,846.352948726667" />
+        <NodeLayout
+          Size="287.2,41.6"
+          Id="Package\ETL for DimDate\step 2-3 Full date conv from str to date time"
+          TopLeft="83.5714289728477,389.564708810199" />
+        <NodeLayout
+          Size="201.6,41.6"
+          Id="Package\ETL for DimDate\step 2-8 calenderyear INT"
+          TopLeft="124.571429568894,757.564710633399" />
+        <NodeLayout
+          Size="285.6,41.6"
+          Id="Package\ETL for DimDate\step 2-1 get Month,Date,Year from DateKey"
+          TopLeft="79.2857146141483,206.376472540133" />
+        <NodeLayout
+          Size="227.2,41.6"
+          Id="Package\ETL for DimDate\step 2-2 create full date as STR"
+          TopLeft="112.857143757295,291.494120231714" />
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\ETL for DimDate\Step 3 Load into DimDate"
+          TopLeft="119.142856498154,1024.38824119271" />
+        <NodeLayout
+          Size="277.6,41.6"
+          Id="Package\ETL for DimDate\Step 2-6 create Englishmonthname in STR"
+          TopLeft="84.285714699298,676.435302493646" />
+        <NodeLayout
+          Size="346.4,41.6"
+          Id="Package\ETL for DimDate\Step 2-Transform DatekeyDT_STR conv from STR to INT"
+          TopLeft="47.8571426503512,105.435294653882" />
+        <NodeLayout
+          Size="260,41.6"
+          Id="Package\ETL for DimDate\step 2-11 create isweekend in boolean"
+          TopLeft="89.285714784448,929.670592589526" />
+        <NodeLayout
+          Size="236,41.6"
+          Id="Package\ETL for DimDate\Step 1-Extract data from CSV File"
+          TopLeft="103.571429313446,5.70588159148668" />
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Flat File Source Output]"
+          TopLeft="221.314285981898,47.3058815914867">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.1294130623956"
+              Start="0,0"
+              End="0,50.6294130623956">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.6294130623956" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Derived Column Output5]"
+          TopLeft="219.014285641301,971.270592589526">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.1176486031828"
+              Start="0,0"
+              End="0,45.6176486031828">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.6176486031828" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,14.8088243015914,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Derived Column Output4]"
+          TopLeft="226.300001064369,799.164710633399">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.188238093268"
+              Start="0,0"
+              End="0,39.688238093268">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.688238093268" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Derived Column Output3]"
+          TopLeft="223.300000468322,624.976477827415">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.4588246662312"
+              Start="0,0"
+              End="0,43.9588246662312">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.9588246662312" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Derived Column Output2]"
+          TopLeft="224.228572134096,718.035302493646">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.5294081397529"
+              Start="0,0"
+              End="0,32.0294081397529">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.0294081397529" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Derived Column Output1]"
+          TopLeft="224.271429185722,247.976472540133">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.5176476915814"
+              Start="0,0"
+              End="0,36.0176476915814">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.0176476915814" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Derived Column Output]"
+          TopLeft="226.814286365071,333.094120231714">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.4705885784843"
+              Start="0,0"
+              End="0,48.9705885784843">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.9705885784843" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Data Conversion Output]"
+          TopLeft="221.57142863225,147.035294653882">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.3411778862508"
+              Start="0,0"
+              End="0,51.8411778862508">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.8411778862508" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="232,41.6"
+          Id="Package\ETL for DimDate\Step 2-10 create Dayofweek INT"
+          TopLeft="108.571429398595,488.494116038352" />
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Derived Column Output6]"
+          TopLeft="223.257143672146,887.952948726667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.7176438628592"
+              Start="0,0"
+              End="0,34.2176438628592">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.2176438628592" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Data Conversion Output1]"
+          TopLeft="225.871429185721,431.164708810199">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.3294072281531"
+              Start="0,0"
+              End="0,49.8294072281531">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.8294072281531" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL for DimDate.Paths[Derived Column Output7]"
+          TopLeft="224.042857817971,530.094116038352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.2823617890632"
+              Start="0,0"
+              End="0,45.7823617890632">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.7823617890632" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL for DimDate\Step 3 Load into DimDate">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
